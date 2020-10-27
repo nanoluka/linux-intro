@@ -1,0 +1,173 @@
+\documentclass{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+\usepackage[utf8]{inputenc}
+\usepackage[serbianc]{babel}
+\usepackage{textgreek}
+\usepackage{pgfpages}
+
+\usetheme{Boadilla}
+\usecolortheme[named=orange]{structure}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[final]{pdfpages}
+\usepackage{xcolor}
+
+\usepackage{listings}
+
+
+
+\useoutertheme[footline=authortitle]{miniframes}
+
+\title[\textit{Linux} - основи]{\color{black}\smallУвод у \\\color{orange}\normalsizeОперативни систем \textit{GNU/Linux}}
+\vspace{-4cm}\author{Александар Пајкановић}
+\titlegraphic{\includegraphics[width=2cm]{logo}}
+
+%\titlegraphic{\includegraphics[width=2cm]{logo}%\hspace{10.75cm}%
+
+%}
+\institute{\texttt{nanoluka.org}\\
+YouTube.com/nanoluka\\
+instagram.com/nanolukaorg\\
+twitter.com/nanolukaorg\\
+github.com/nanoluka\\
+\texttt{nanolukaorg@gmail.com}}
+
+\date{\color{orange}Октобар 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Кориштење овог документа}
+\begin{itemize}
+    \item \textbf{Лиценца}: 
+    \begin{itemize}
+        \item Документ и пратеће к\^{о}дове објављујем под лиценцом \color{orange}\href{https://creativecommons.org/licenses/by-sa/4.0//legalcode}{\textit{Attribution-ShareAlike — CC BY-СА}}\color{black}. Ова лиценца дозвољава ремикс и прераду, као и комерцијално кориштење дјела, ако/док се \textbf{правилно назначава име аутора} и ако се \textbf{прерада лиценцира под истим условима}. Ова лиценца се често упоређује са „\textit{copyleft}” лиценцирањем слободног софтвера или софтвера отвореног к\^{о}да. Сва дјела настала на основу дјела лиценцираног овом лиценцом, требало би да буду лиценцирана истом лиценцом, која, поред осталог, дозвољава комерцијално кориштење.
+    \end{itemize}
+    \item \textbf{Навођење (цитирање)}: 
+    \begin{itemize}
+        \item Ако сте користили овај документ као извор у сопственим материјалима, молим да цитирате на сљедећи начин: А. Пајкановић, ,,Увод у оперативни систем \textit{GNU/Linux}'', доступно на \color{orange}\href{github.com/nanoluka/linux-intro.git}{github.com/nanoluka/linux-intro.git}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Уопштено}
+\begin{itemize}
+    \item Све је датотека.
+    \item Екстензије нису потребне. Ствар је договора и личног избора да користимо неке од њих.
+    \item Терминал се покреће из скупа осталих апликација, или просто претрагом: \textit{terminal}, а може и пречицом на тастатури: \texttt{Ctrl+Alt+T}
+    \item Нови прозор терминала на истој путањи добија се притиском тастера: \texttt{Ctrl+Shift+N}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Манипулација директоријумима и датотекама}
+
+\begin{itemize}
+    \item \texttt{ls} - скраћено од \textit{list}, исписује директоријуме и датотеке који се налазе на тренутној путањи
+    \item \texttt{cd} - скраћено од \textit{change directory}, мијења тренутну путању
+    \item \texttt{mkdir} - скраћено од \textit{make directory} - прави нови директоријум (\textit{folder})
+    \item \texttt{mv} - скраћено од \textit{move}, премјештање на нову путању (\textit{cut/paste})
+    \item \texttt{cp} - скраћено од \textit{copy}, копирање на нову путању (\textit{copy/paste})
+    \item \texttt{rm} - скраћено од \textit{remove}, брисање
+    \item \texttt{pwd} - скраћено од \textit{present working directory}, враћа тренутну путању
+    \item \texttt{..} - показивач на директоријум изнад (\textit{parent})
+    \item \texttt{.} - показивач на тренутни директоријум
+    \item \texttt{\~} - показивач на ткз. \textit{home} директоријум тренутног корисника
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Манипулација директоријумима и датотекама}
+\begin{block}{mkdir, cd, ls, pwd, mv, cp}
+\begin{lstlisting}
+mkdir zaPocetak
+ls
+cd zaPocetak
+pwd
+cd ..
+mv zaPocetak zaKraj
+ls
+cp -r zaKraj zaPocetak
+ls
+rm -r zaKraj
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Опције}
+\begin{itemize}
+    \item \texttt{ls -laht}
+    \begin{itemize}
+        \item \textbf{l} - скраћено од \textit{list} (опет), излаз у виду листе
+        \item \textbf{a} - скраћено од \textit{all}, прикажи сав (и скривени) садржај локације
+        \item \textbf{h} - скраћено од \textit{human readable}, величине датотека дате у KB/MB/GB
+        \item \textbf{t} - скраћено од \textit{time}, ставке поредане по датуму посљедње измјене
+    \end{itemize}
+    \item \texttt{mv/rm -rf}
+    \begin{itemize}
+        \item \textbf{r} - скраћено од \textit{recursive}, да се команда односи и на садржај директоријума
+        \item \textbf{f} - скраћено од \textit{force}, игнориши евентуална упозерења, не приказуј
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Архивирање}
+\begin{itemize}
+    \item \textbf{tar} - само сакупља задате датотеке у једну датотеку, са или без компресије
+    \begin{itemize}
+        \item \textbf{c} - скраћено од \textit{create}, потребно приликом паковања
+        \item \textbf{f} - скраћено од \textit{file}, потребно у сваком случају
+        \item \textbf{x} - скраћено од \textit{extract}, потребно приликом распакивања
+        \item \textbf{z} - скраћено од \textit{gzip}, потребно за компресију
+    \end{itemize}
+\end{itemize}
+
+\begin{block}{без компресије}
+ \begin{lstlisting}
+ tar cf zaPocetak.tar zaPocetak
+ tar xf zaPocetak.tar
+
+ \end{lstlisting}
+    \end{block}
+
+\begin{block}{са компресијом}
+ \begin{lstlisting}
+ tar zcf zaPocetak.tar.gz zaPocetak
+ tar zxf zaPocetak.tar.gz
+ \end{lstlisting}
+    \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Инсталација пакета}
+
+\begin{itemize}
+    \item \texttt{sudo} - подизање нивоа привилегија
+    \item \texttt{apt} - пакет менаџер за \textit{Debian}-олике дистрибуције Линукса, каква је Убунту
+\end{itemize}
+
+\begin{block}{са компресијом}
+ \begin{lstlisting}
+ sudo apt-get update
+ sudo apt-cache search <...>
+ sudo apt-get install python
+ sudo apt-get install git sublime-text
+ \end{lstlisting}
+\end{block}
+    
+\end{frame}
+
+\begin{frame}{Унос текста}
+\begin{itemize}
+    \item \texttt{vi} - један од начина да то урадимо не напуштајући терминал
+    \item Три режима рада:
+    \begin{itemize}
+        \item \texttt{ESC+<taster>} - гдје тастер може да буде било која типка тастатуре, овако изадјемо команде обриши, исијеци, налијепи, замијени...
+        \item \texttt{ESC+i/a/I/A} - унос текста
+        \item \texttt{ESC+:} - за унос компликованијих команди, нпр. \textit{find/replace}
+    \end{itemize}
+    \item \textcolor{orange}{\href{https://www.gosquared.com/resources/vi-cheat-sheet/}{Списак пречица}}
+\end{itemize}
+\end{frame}
+
+\end{document}
